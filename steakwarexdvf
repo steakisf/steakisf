@@ -13,8 +13,8 @@ getgenv().Arceus = {
         ["Humanize"] = (true), -- // Makes Soo The Silent Doesnt Hit The Same Position
         ["HumanizeValue"] = (3), -- // Makes How Much Power It Changes
         
-        ["TriggerBot"] = (true), -- // Shoots AutoMatically
-        ["UseTriggerBotKeybind"] = (true), -- // Enable / Disable TriggerBot Keybind
+        ["TriggerBot"] = (false), -- // Shoots AutoMatically
+        ["UseTriggerBotKeybind"] = (false), -- // Enable / Disable TriggerBot Keybind
         ["TriggerBotKey"] = ("MouseButton3"), -- // KeyBind To Enable / Disable TriggerBot You Can Find More At https://create.roblox.com/docs/reference/engine/enums/UserInputType
         
         ["PredictMovement"] = (true), -- // Predicts Targets Movement
@@ -22,7 +22,7 @@ getgenv().Arceus = {
         ["PredictionVelocity"] = (0.16011), -- // How Much It Predicts
         
         ["AntiGroundShots"] = (true), -- // Makes So You Dont Shoot The Ground
-        ["AntiGroundValue"] = (1), -- // How Much Velocity It Rmoves From Target
+        ["AntiGroundValue"] = (2), -- // How Much Velocity It Rmoves From Target
         ["WhenAntiGroundActivate"] = (-20), -- // When Its Gonna Activate
         
         ["AntiAimViewer"] = (true), -- // Bypasses The Mouse Position For The Server 
