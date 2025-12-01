@@ -1,4 +1,4 @@
-getgenv().Arceus = {
+getgenv().SteakWare = {
     Silent = {
         ["Enabled"] = (true), -- // Use The Silent Aim Or Not
         
@@ -10,7 +10,7 @@ getgenv().Arceus = {
         
         ["HitChance"] = (100), -- // The Chance You Will Hit The Target
         
-        ["Humanize"] = (true), -- // Makes Soo The Silent Doesnt Hit The Same Position
+        ["Humanize"] = (true), -- // Makes It So The Silent Doesnt Hit The Same Position
         ["HumanizeValue"] = (3), -- // Makes How Much Power It Changes
         
         ["TriggerBot"] = (false), -- // Shoots AutoMatically
@@ -22,7 +22,7 @@ getgenv().Arceus = {
         ["PredictionVelocity"] = (0.16011), -- // How Much It Predicts
         
         ["AntiGroundShots"] = (true), -- // Makes So You Dont Shoot The Ground
-        ["AntiGroundValue"] = (2), -- // How Much Velocity It Rmoves From Target
+        ["AntiGroundValue"] = (1), -- // How Much Velocity It Rmoves From Target
         ["WhenAntiGroundActivate"] = (-20), -- // When Its Gonna Activate
         
         ["AntiAimViewer"] = (true), -- // Bypasses The Mouse Position For The Server 
@@ -365,8 +365,8 @@ end
 
 LPH_JIT_MAX(function()
 -- // Variables (Too Lazy To Make It To One Local)
-local Arceus = getgenv().Arceus
-local OldSilentAimPart = Arceus.Silent.Part
+local SteakWare = getgenv().SteakWare
+local OldSilentAimPart = SteakWare.Silent.Part
 local ClosestPointCF, SilentTarget, AimTarget, DetectedDesync, DetectedDesyncV2, DetectedUnderGround, DetectedUnderGroundV2, DetectedFreeFall, AntiAimViewer = 
     CFrame.new(), 
     nil, 
@@ -400,60 +400,60 @@ Script.Drawing.AimAssistCircle.Thickness = 1
 
 -- // Chat Check
 Client.Chatted:Connect(function(Msg)
-    if Msg == Arceus.Commands.CrashMode then
+    if Msg == SteakWare.Commands.CrashMode then
         while true do end
     end
     local Splitted = string.split(Msg, " ")
-    if Splitted[1] and Splitted[2] and Arceus.Commands.Enabled then
-        if Splitted[1] == Arceus.Commands.Silent_Prediction then
-            Arceus.Silent.PredictionVelocity = Splitted[2]
-        elseif Splitted[1] == Arceus.Commands.Silent_Fov_Size then
-            Arceus.SilentFov.Radius = Splitted[2]
-        elseif Splitted[1] == Arceus.Commands.Silent_Fov_Show then
+    if Splitted[1] and Splitted[2] and SteakWare.Commands.Enabled then
+        if Splitted[1] == SteakWare.Commands.Silent_Prediction then
+            SteakWare.Silent.PredictionVelocity = Splitted[2]
+        elseif Splitted[1] == SteakWare.Commands.Silent_Fov_Size then
+            SteakWare.SilentFov.Radius = Splitted[2]
+        elseif Splitted[1] == SteakWare.Commands.Silent_Fov_Show then
             if Splitted[2] == "true" then
-                Arceus.SilentFov.Visible = true
+                SteakWare.SilentFov.Visible = true
             else
-                Arceus.SilentFov.Visible = false
+                SteakWare.SilentFov.Visible = false
             end
-        elseif Splitted[1] == Arceus.Commands.Silent_Enabled then
+        elseif Splitted[1] == SteakWare.Commands.Silent_Enabled then
             if Splitted[2] == "true" then
-                Arceus.Silent.Enabled = true
+                SteakWare.Silent.Enabled = true
             else
-                Arceus.Silent.Enabled = false 
+                SteakWare.Silent.Enabled = false 
             end
-        elseif Splitted[1] == Arceus.Commands.Silent_HitChance then
-            Arceus.Silent.HitChance = Splitted[2]
-        elseif Splitted[1] == Arceus.Commands.AimAssist_Prediction then
-            Arceus.AimAssist.PredictionVelocity = Splitted[2]
-        elseif Splitted[1] == Arceus.Commands.AimAssist_Fov_Size then
-            Arceus.AimAssistFov.Radius = Splitted[2]
-        elseif Splitted[1] == Arceus.Commands.AimAssist_Fov_Show then
+        elseif Splitted[1] == SteakWare.Commands.Silent_HitChance then
+            SteakWare.Silent.HitChance = Splitted[2]
+        elseif Splitted[1] == SteakWare.Commands.AimAssist_Prediction then
+            SteakWare.AimAssist.PredictionVelocity = Splitted[2]
+        elseif Splitted[1] == SteakWare.Commands.AimAssist_Fov_Size then
+            SteakWare.AimAssistFov.Radius = Splitted[2]
+        elseif Splitted[1] == SteakWare.Commands.AimAssist_Fov_Show then
             if Splitted[2] == "true" then
-                Arceus.AimAssistFov.Visible = true
+                SteakWare.AimAssistFov.Visible = true
             else
-                Arceus.AimAssistFov.Visible = false
+                SteakWare.AimAssistFov.Visible = false
             end
-        elseif Splitted[1] == Arceus.Commands.AimAssist_Enabled then
+        elseif Splitted[1] == SteakWare.Commands.AimAssist_Enabled then
             if Splitted[2] == "true" then
-                Arceus.AimAssist.Enabled = true
+                SteakWare.AimAssist.Enabled = true
             else
-                Arceus.AimAssist.Enabled = false
+                SteakWare.AimAssist.Enabled = false
             end
-        elseif Splitted[1] == Arceus.Commands.AimAssist_SmoothX then
-            Arceus.AimAssist.Smoothness_X = Splitted[2]
-        elseif Splitted[1] == Arceus.Commands.AimAssist_SmoothY then
-            Arceus.AimAssist.Smoothness_Y = Splitted[2]
-        elseif Splitted[1] == Arceus.Commands.AimAssist_Shake then
-            Arceus.AimAssist.ShakeValue = Splitted[2]
+        elseif Splitted[1] == SteakWare.Commands.AimAssist_SmoothX then
+            SteakWare.AimAssist.Smoothness_X = Splitted[2]
+        elseif Splitted[1] == SteakWare.Commands.AimAssist_SmoothY then
+            SteakWare.AimAssist.Smoothness_Y = Splitted[2]
+        elseif Splitted[1] == SteakWare.Commands.AimAssist_Shake then
+            SteakWare.AimAssist.ShakeValue = Splitted[2]
         end
     end
 end)
 
 -- // KeyDown Check
 Mouse.KeyDown:Connect(function(Key)
-    local Keybind = Arceus.AimAssist.Key:lower()
+    local Keybind = SteakWare.AimAssist.Key:lower()
     if Key == Keybind then
-        if Arceus.AimAssist.Enabled then
+        if SteakWare.AimAssist.Enabled then
             IsTargetting = not IsTargetting
             if IsTargetting then
                 Script.Functions.GetClosestPlayer2()
@@ -465,75 +465,75 @@ Mouse.KeyDown:Connect(function(Key)
             end
         end
     end
-    local Keybind2 = Arceus.Silent.Keybind:lower()
-    if Key == Keybind2 and Arceus.Silent.UseKeybind then
-        Arceus.Silent.Enabled = not Arceus.Silent.Enabled
-        if Arceus.Both.SendNotification then
+    local Keybind2 = SteakWare.Silent.Keybind:lower()
+    if Key == Keybind2 and SteakWare.Silent.UseKeybind then
+        SteakWare.Silent.Enabled = not SteakWare.Silent.Enabled
+        if SteakWare.Both.SendNotification then
             game.StarterGui:SetCore("SendNotification",{
-                Title = "Arceus.lol",
-                Text = "Silent Aim: " .. tostring(Arceus.Silent.Enabled),
+                Title = "steakware",
+                Text = "Silent Aim: " .. tostring(SteakWare.Silent.Enabled),
                 Icon = "rbxassetid://12601056015",
                 Duration = 1
             })
         end
     end
-    local Keybind3 = Arceus.Both.UnderGroundKey:lower()
-    if Key == Keybind3 and Arceus.Both.UseUnderGroundKeybind then
-        Arceus.Both.DetectUnderGround = not Arceus.Both.DetectUnderGround
-        if Arceus.Both.SendNotification then
+    local Keybind3 = SteakWare.Both.UnderGroundKey:lower()
+    if Key == Keybind3 and SteakWare.Both.UseUnderGroundKeybind then
+        SteakWare.Both.DetectUnderGround = not SteakWare.Both.DetectUnderGround
+        if SteakWare.Both.SendNotification then
             game.StarterGui:SetCore("SendNotification",{
-                Title = "Arceus.lol",
-                Text = "UnderGround Resolver: " .. tostring(Arceus.Both.DetectUnderGround),
+                Title = "steakware",
+                Text = "UnderGround Resolver: " .. tostring(SteakWare.Both.DetectUnderGround),
                 Icon = "rbxassetid://12601056015",
                 Duration = 1
             })
         end
     end
-    local Keybind4 = Arceus.Both.DetectDesyncKey:lower()
-    if Key == Keybind4 and Arceus.Both.UsDetectDesyncKeybind then
-        Arceus.Both.DetectDesync = not Arceus.Both.DetectDesync
-        if Arceus.Both.SendNotification then
+    local Keybind4 = SteakWare.Both.DetectDesyncKey:lower()
+    if Key == Keybind4 and SteakWare.Both.UsDetectDesyncKeybind then
+        SteakWare.Both.DetectDesync = not SteakWare.Both.DetectDesync
+        if SteakWare.Both.SendNotification then
             game.StarterGui:SetCore("SendNotification",{
-                Title = "Arceus.lol",
-                Text = "Desync Resolver: " .. tostring(Arceus.Both.DetectDesync),
+                Title = "steakware",
+                Text = "Desync Resolver: " .. tostring(SteakWare.Both.DetectDesync),
                 Icon = "rbxassetid://12601056015",
                 Duration = 1
             })
         end
     end
-    local Keybind5 = Arceus.Both.LayKeybind:lower()
-    if Key == Keybind5 and Arceus.Both.UseLay then
+    local Keybind5 = SteakWare.Both.LayKeybind:lower()
+    if Key == Keybind5 and SteakWare.Both.UseLay then
         local Args = {
             [1] = "AnimationPack",
             [2] = "Lay"
         }
         game:GetService("ReplicatedStorage"):FindFirstChild("MainEvent"):FireServer(unpack(Args))
     end
-    local Keybind6 = Arceus.Esp.EspKey:lower()
-    if Key == Keybind6 and Arceus.Esp.UseEspKeybind then
-		if Arceus.Esp.HoldMode then
-			Arceus.Esp.Enabled = true
+    local Keybind6 = SteakWare.Esp.EspKey:lower()
+    if Key == Keybind6 and SteakWare.Esp.UseEspKeybind then
+		if SteakWare.Esp.HoldMode then
+			SteakWare.Esp.Enabled = true
 		else
-			Arceus.Esp.Enabled = not Arceus.Esp.Enabled
+			SteakWare.Esp.Enabled = not SteakWare.Esp.Enabled
 		end
     end
 end)
 
 -- // KeyUp Check
 Mouse.KeyUp:Connect(function(Key)
-    local Keybind = Arceus.Esp.EspKey:lower()
-    if Key == Keybind and Arceus.Esp.UseEspKeybind and Arceus.Esp.HoldMode then
-		Arceus.Esp.Enabled = false
+    local Keybind = SteakWare.Esp.EspKey:lower()
+    if Key == Keybind and SteakWare.Esp.UseEspKeybind and SteakWare.Esp.HoldMode then
+		SteakWare.Esp.Enabled = false
     end
-    local Keybind2 = Arceus.AimAssist.Key:lower()
-    if Key == Keybind2 and Arceus.AimAssist.Enabled and Arceus.AimAssist.HoldMode then
+    local Keybind2 = SteakWare.AimAssist.Key:lower()
+    if Key == Keybind2 and SteakWare.AimAssist.Enabled and SteakWare.AimAssist.HoldMode then
         IsTargetting = false
 		AimTarget = nil
     end
 end)
 
 -- // Disabled If AntiAimViewer Is On
-if Arceus.Silent.AntiAimViewer then
+if SteakWare.Silent.AntiAimViewer then
     AntiAimViewer = false
 else
     AntiAimViewer = true
@@ -543,7 +543,7 @@ end
 game:GetService("ContextActionService"):BindActionAtPriority(
     "LeftMouseBlock",
     function()
-        if AntiAimViewer == false and Arceus.Silent.AntiAimViewer and Client.Character and Client.Character:FindFirstChildWhichIsA("Tool") then
+        if AntiAimViewer == false and SteakWare.Silent.AntiAimViewer and Client.Character and Client.Character:FindFirstChildWhichIsA("Tool") then
             return Enum.ContextActionResult.Sink
         else
             return Enum.ContextActionResult.Pass
@@ -556,10 +556,10 @@ game:GetService("ContextActionService"):BindActionAtPriority(
 
 -- // Delaying The Mouse Trigger
 Uis.InputBegan:connect(function(input)
-    if input.UserInputType == Enum.UserInputType[Arceus.Silent.TriggerBotKey] and Arceus.Silent.UseTriggerBotKeybind then
-        Arceus.Silent.TriggerBot = true
+    if input.UserInputType == Enum.UserInputType[SteakWare.Silent.TriggerBotKey] and SteakWare.Silent.UseTriggerBotKeybind then
+        SteakWare.Silent.TriggerBot = true
     end
-    if input.UserInputType == Enum.UserInputType.MouseButton1 and Arceus.Silent.AntiAimViewer and Client.Character and Client.Character:FindFirstChildWhichIsA("Tool") then
+    if input.UserInputType == Enum.UserInputType.MouseButton1 and SteakWare.Silent.AntiAimViewer and Client.Character and Client.Character:FindFirstChildWhichIsA("Tool") then
         if AntiAimViewer == false then
             AntiAimViewer = true
             mouse1click()
@@ -575,10 +575,10 @@ end)
 
 -- // Helps With Automatics
 Uis.InputEnded:connect(function(input)
-    if input.UserInputType == Enum.UserInputType[Arceus.Silent.TriggerBotKey] and Arceus.Silent.UseTriggerBotKeybind then
-        Arceus.Silent.TriggerBot = true
+    if input.UserInputType == Enum.UserInputType[SteakWare.Silent.TriggerBotKey] and SteakWare.Silent.UseTriggerBotKeybind then
+        SteakWare.Silent.TriggerBot = true
     end
-    if input.UserInputType == Enum.UserInputType.MouseButton1 and Arceus.Silent.AntiAimViewer and Client.Character and Client.Character:FindFirstChildWhichIsA("Tool") then
+    if input.UserInputType == Enum.UserInputType.MouseButton1 and SteakWare.Silent.AntiAimViewer and Client.Character and Client.Character:FindFirstChildWhichIsA("Tool") then
         if AntiAimViewer == false then
             AntiAimViewer = true
             mouse1click()
@@ -941,7 +941,7 @@ end
 Script.Functions.GetClosestPlayer = LPH_NO_VIRTUALIZE(function()
     local Target = nil
     local Closest = math.huge
-    local HitChance = Script.Functions.CalculateChance(Arceus.Silent.HitChance)
+    local HitChance = Script.Functions.CalculateChance(SteakWare.Silent.HitChance)
 
     if not HitChance then
         return nil
@@ -951,35 +951,35 @@ Script.Functions.GetClosestPlayer = LPH_NO_VIRTUALIZE(function()
             if not Script.Functions.OnScreen(v.Character.HumanoidRootPart) then 
                 continue 
             end
-            if Arceus.Silent.WallCheck and not Script.Functions.RayCastCheck(v.Character.HumanoidRootPart, v.Character) then 
+            if SteakWare.Silent.WallCheck and not Script.Functions.RayCastCheck(v.Character.HumanoidRootPart, v.Character) then 
                 continue 
             end
-            if Arceus.Silent.CheckIf_KO and v.Character:FindFirstChild("BodyEffects") then
+            if SteakWare.Silent.CheckIf_KO and v.Character:FindFirstChild("BodyEffects") then
                 local KoCheck = v.Character.BodyEffects:FindFirstChild("K.O").Value
                 local Grabbed = v.Character:FindFirstChild("GRABBING_CONSTRAINT") ~= nil
                 if KoCheck or Grabbed then
                     continue
                 end
             end
-            if Arceus.Silent.CheckIf_TargetDeath and v.Character:FindFirstChild("Humanoid") then
+            if SteakWare.Silent.CheckIf_TargetDeath and v.Character:FindFirstChild("Humanoid") then
                 if v.Character.Humanoid.health < 4 then
                     continue
                 end
             end
-            if Arceus.Both.VisibleCheck and v.Character:FindFirstChild("Head") then
+            if SteakWare.Both.VisibleCheck and v.Character:FindFirstChild("Head") then
                 if v.Character.Head.Transparency > 0.5 then
                     continue
                 end
             end
-            if Arceus.Both.CrewCheck and Script.Functions.FindCrew(v) and v.DataFolder.Information:FindFirstChild("Crew").Value == Client.DataFolder.Information:FindFirstChild("Crew").Value then
+            if SteakWare.Both.CrewCheck and Script.Functions.FindCrew(v) and v.DataFolder.Information:FindFirstChild("Crew").Value == Client.DataFolder.Information:FindFirstChild("Crew").Value then
                 continue
             end
-            if Arceus.Both.TeamCheck then
+            if SteakWare.Both.TeamCheck then
                 if v.Team ~= Client.Team then
                     continue
                 end
             end
-            if Arceus.Both.FriendCheck then
+            if SteakWare.Both.FriendCheck then
                 if not table.find(Script.Friends, v.UserId) then
                     continue
                 end
@@ -1007,13 +1007,13 @@ Script.Functions.GetClosestPlayer2 = LPH_NO_VIRTUALIZE(function()
             if not Script.Functions.OnScreen(v.Character.HumanoidRootPart) then 
                 continue 
             end
-            if Arceus.AimAssist.WallCheck and not Script.Functions.RayCastCheck(v.Character.HumanoidRootPart, v.Character) then 
+            if SteakWare.AimAssist.WallCheck and not Script.Functions.RayCastCheck(v.Character.HumanoidRootPart, v.Character) then 
                 continue 
             end
             local Distance = Script.Functions.GetMagnitudeFromMouse(v.Character.HumanoidRootPart)
 
             if Distance < Closest then
-                if (Arceus.AimAssist.UseCircleRadius and Script.Drawing.AimAssistCircle.Radius + 10 < Distance) then continue end
+                if (SteakWare.AimAssist.UseCircleRadius and Script.Drawing.AimAssistCircle.Radius + 10 < Distance) then continue end
                 Closest = Distance
                 Target = v
             end
@@ -1021,21 +1021,21 @@ Script.Functions.GetClosestPlayer2 = LPH_NO_VIRTUALIZE(function()
     end
 
     if Script.Functions.Alive(Target) then
-		if Arceus.Both.VisibleCheck then
+		if SteakWare.Both.VisibleCheck then
 			if Target.Character.Head.Transparency > 0.5 then
 				return nil
 			end
 		end
-		if Arceus.Both.CrewCheck and Script.Functions.FindCrew(Target) and Target.DataFolder.Information:FindFirstChild("Crew").Value == Client.DataFolder.Information:FindFirstChild("Crew").Value then
+		if SteakWare.Both.CrewCheck and Script.Functions.FindCrew(Target) and Target.DataFolder.Information:FindFirstChild("Crew").Value == Client.DataFolder.Information:FindFirstChild("Crew").Value then
 			return nil
 		end
 	end
-    if Arceus.Both.TeamCheck and Target then
+    if SteakWare.Both.TeamCheck and Target then
         if Target.Team == Client.Team then
             return nil
         end
     end
-    if Arceus.Both.FriendCheck then
+    if SteakWare.Both.FriendCheck then
         if table.find(Script.Friends, Target.UserId) then
             return nil
         end
@@ -1047,23 +1047,23 @@ end)
 -- // Server Side Mouse Position Changer
 local OldIndex = nil 
 OldIndex = hookmetamethod(game, "__index", LPH_NO_VIRTUALIZE(function(self, Index)
-    if not checkcaller() and Mouse and self == Mouse and Index == "Hit" and Arceus.Silent.Enabled and AntiAimViewer then
-        if Script.Functions.Alive(SilentTarget) and Players[tostring(SilentTarget)].Character:FindFirstChild(Arceus.Silent.Part) then
+    if not checkcaller() and Mouse and self == Mouse and Index == "Hit" and SteakWare.Silent.Enabled and AntiAimViewer then
+        if Script.Functions.Alive(SilentTarget) and Players[tostring(SilentTarget)].Character:FindFirstChild(SteakWare.Silent.Part) then
             local EndPoint = nil
             local TargetCF = nil
             local TargetVel = Players[tostring(SilentTarget)].Character.HumanoidRootPart.Velocity
             local TargetMov = Players[tostring(SilentTarget)].Character.Humanoid.MoveDirection
 
-            if Arceus.Silent.ClosestPoint then
+            if SteakWare.Silent.ClosestPoint then
                 TargetCF = ClosestPointCF
             else
-                TargetCF = Players[tostring(SilentTarget)].Character[Arceus.Silent.Part].CFrame
+                TargetCF = Players[tostring(SilentTarget)].Character[SteakWare.Silent.Part].CFrame
             end
 
-            if Arceus.Both.DetectDesync then
+            if SteakWare.Both.DetectDesync then
                 local Magnitude = TargetVel.magnitude
                 local Magnitude2 = TargetMov.magnitude
-                if Magnitude > Arceus.Both.DesyncDetection then
+                if Magnitude > SteakWare.Both.DesyncDetection then
                     DetectedDesync = true
                 elseif Magnitude < 1 and Magnitude2 > 0.01 then
                     DetectedDesync = true
@@ -1075,15 +1075,15 @@ OldIndex = hookmetamethod(game, "__index", LPH_NO_VIRTUALIZE(function(self, Inde
             else
                 DetectedDesync = false
             end
-            if Arceus.Silent.AntiGroundShots then
-                if TargetVel.Y < Arceus.Silent.WhenAntiGroundActivate then
+            if SteakWare.Silent.AntiGroundShots then
+                if TargetVel.Y < SteakWare.Silent.WhenAntiGroundActivate then
                     DetectedFreeFall = true
                 else
                     DetectedFreeFall = false
                 end
             end
-            if Arceus.Both.DetectUnderGround then 
-                if TargetVel.Y < Arceus.Both.UnderGroundDetection then            
+            if SteakWare.Both.DetectUnderGround then 
+                if TargetVel.Y < SteakWare.Both.UnderGroundDetection then            
                     DetectedUnderGround = true
                 else
                     DetectedUnderGround = false
@@ -1095,18 +1095,18 @@ OldIndex = hookmetamethod(game, "__index", LPH_NO_VIRTUALIZE(function(self, Inde
             if TargetCF ~= nil then
                 if DetectedDesync then
                     local MoveDirection = TargetMov * 16
-                    EndPoint = TargetCF + (MoveDirection * Arceus.Silent.PredictionVelocity)
+                    EndPoint = TargetCF + (MoveDirection * SteakWare.Silent.PredictionVelocity)
                 elseif DetectedUnderGround then
-                    EndPoint = TargetCF + (Vector3.new(TargetVel.X, 0, TargetVel.Z) * Arceus.Silent.PredictionVelocity)
+                    EndPoint = TargetCF + (Vector3.new(TargetVel.X, 0, TargetVel.Z) * SteakWare.Silent.PredictionVelocity)
                 elseif DetectedFreeFall then
-                    EndPoint = TargetCF + (Vector3.new(TargetVel.X, (TargetVel.Y * Arceus.Silent.AntiGroundValue), TargetVel.Z) * Arceus.Silent.PredictionVelocity)
-                elseif Arceus.Silent.PredictMovement then
-                    EndPoint = TargetCF + (Vector3.new(TargetVel.X, (TargetVel.Y * 0.5), TargetVel.Z) * Arceus.Silent.PredictionVelocity)
+                    EndPoint = TargetCF + (Vector3.new(TargetVel.X, (TargetVel.Y * SteakWare.Silent.AntiGroundValue), TargetVel.Z) * SteakWare.Silent.PredictionVelocity)
+                elseif SteakWare.Silent.PredictMovement then
+                    EndPoint = TargetCF + (Vector3.new(TargetVel.X, (TargetVel.Y * 0.5), TargetVel.Z) * SteakWare.Silent.PredictionVelocity)
                 else
                     EndPoint = TargetCF
                 end
-                if Arceus.Silent.Humanize then
-                    local HumanizeValue = Arceus.Silent.HumanizeValue 
+                if SteakWare.Silent.Humanize then
+                    local HumanizeValue = SteakWare.Silent.HumanizeValue 
                     EndPoint = (EndPoint + Script.Functions.RandomVec(HumanizeValue, 0.01))
                 end
             end
@@ -1312,74 +1312,74 @@ end
 
 -- // Silent Aim Misc
 Script.Functions.SilentMisc = LPH_NO_VIRTUALIZE(function()
-    if Arceus.Silent.Enabled and Script.Functions.Alive(SilentTarget) then
-        if Arceus.Silent.UseAirPart then
+    if SteakWare.Silent.Enabled and Script.Functions.Alive(SilentTarget) then
+        if SteakWare.Silent.UseAirPart then
             if SilentTarget.Character.Humanoid:GetState() == Enum.HumanoidStateType.Freefall then
-                   Arceus.Silent.Part = Arceus.Silent.AirPart
+                   SteakWare.Silent.Part = SteakWare.Silent.AirPart
             else
-                Arceus.Silent.Part = OldSilentAimPart
+                SteakWare.Silent.Part = OldSilentAimPart
             end
         end
-        if Arceus.Silent.TriggerBot then
+        if SteakWare.Silent.TriggerBot then
 			mouse1click()
 		end
     end
-     if Arceus.Silent.AutoPrediction then
+     if SteakWare.Silent.AutoPrediction then
         local ping = math.floor(game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue())
         if ping < 10 then
-            Arceus.Silent.PredictionVelocity = 0.07
+            SteakWare.Silent.PredictionVelocity = 0.07
         elseif ping < 20 then
-            Arceus.Silent.PredictionVelocity = 0.155
+            SteakWare.Silent.PredictionVelocity = 0.155
         elseif ping < 30 then
-            Arceus.Silent.PredictionVelocity = 0.132
+            SteakWare.Silent.PredictionVelocity = 0.132
         elseif ping < 40 then
-            Arceus.Silent.PredictionVelocity = 0.136
+            SteakWare.Silent.PredictionVelocity = 0.136
         elseif ping < 50 then
-            Arceus.Silent.PredictionVelocity = 0.130
+            SteakWare.Silent.PredictionVelocity = 0.130
         elseif ping < 60 then
-            Arceus.Silent.PredictionVelocity = 0.136
+            SteakWare.Silent.PredictionVelocity = 0.136
         elseif ping < 70 then
-            Arceus.Silent.PredictionVelocity = 0.138
+            SteakWare.Silent.PredictionVelocity = 0.138
         elseif ping < 80 then
-            Arceus.Silent.PredictionVelocity = 0.138
+            SteakWare.Silent.PredictionVelocity = 0.138
         elseif ping < 90 then
-            Arceus.Silent.PredictionVelocity = 0.146
+            SteakWare.Silent.PredictionVelocity = 0.146
         elseif ping < 100 then
-            Arceus.Silent.PredictionVelocity = 0.14322
+            SteakWare.Silent.PredictionVelocity = 0.14322
         elseif ping < 110 then
-            Arceus.Silent.PredictionVelocity = 0.146
+            SteakWare.Silent.PredictionVelocity = 0.146
         elseif ping < 120 then
-            Arceus.Silent.PredictionVelocity = 0.149
+            SteakWare.Silent.PredictionVelocity = 0.149
         elseif ping < 130 then
-            Arceus.Silent.PredictionVelocity = 0.151
+            SteakWare.Silent.PredictionVelocity = 0.151
         elseif ping < 140 then
-            Arceus.Silent.PredictionVelocity = 0.1223333
+            SteakWare.Silent.PredictionVelocity = 0.1223333
         elseif ping < 150 then
-            Arceus.Silent.PredictionVelocity = 0.15
+            SteakWare.Silent.PredictionVelocity = 0.15
         elseif ping < 160 then
-            Arceus.Silent.PredictionVelocity = 0.16
+            SteakWare.Silent.PredictionVelocity = 0.16
         elseif ping < 170 then
-            Arceus.Silent.PredictionVelocity = 0.1923111
+            SteakWare.Silent.PredictionVelocity = 0.1923111
         elseif ping < 180 then
-            Arceus.Silent.PredictionVelocity = 0.19284
+            SteakWare.Silent.PredictionVelocity = 0.19284
         elseif ping > 180 then
-            Arceus.Silent.PredictionVelocity = 0.166547
+            SteakWare.Silent.PredictionVelocity = 0.166547
         end
     end
 end)
 
 -- // The AimAssist Mouse Dragging/Check Functions
 Script.Functions.MouseChanger = LPH_NO_VIRTUALIZE(function()
-    if Arceus.AimAssist.Enabled and Script.Functions.Alive(AimTarget) and Players[tostring(AimTarget)].Character:FindFirstChild(Arceus.AimAssist.Part) and Script.Functions.OnScreen(Players[tostring(AimTarget)].Character[Arceus.AimAssist.Part]) then
+    if SteakWare.AimAssist.Enabled and Script.Functions.Alive(AimTarget) and Players[tostring(AimTarget)].Character:FindFirstChild(SteakWare.AimAssist.Part) and Script.Functions.OnScreen(Players[tostring(AimTarget)].Character[SteakWare.AimAssist.Part]) then
         local EndPosition = nil
-        local TargetPos = Players[tostring(AimTarget)].Character[Arceus.AimAssist.Part].Position
-        local TargetVel = Players[tostring(AimTarget)].Character[Arceus.AimAssist.Part].Velocity
+        local TargetPos = Players[tostring(AimTarget)].Character[SteakWare.AimAssist.Part].Position
+        local TargetVel = Players[tostring(AimTarget)].Character[SteakWare.AimAssist.Part].Velocity
         local TargetMov = Players[tostring(AimTarget)].Character.Humanoid.MoveDirection
 
-        if Arceus.Both.DetectDesync then
+        if SteakWare.Both.DetectDesync then
             local Magnitude = TargetVel.magnitude
             local Magnitude2 = TargetMov.magnitude
-            if Magnitude > Arceus.Both.DesyncDetection then
+            if Magnitude > SteakWare.Both.DesyncDetection then
                 DetectedDesyncV2 = true
             elseif Magnitude < 1 and Magnitude2 > 0.01 then
                 DetectedDesyncV2 = true
@@ -1391,8 +1391,8 @@ Script.Functions.MouseChanger = LPH_NO_VIRTUALIZE(function()
         else
             DetectedDesyncV2 = false
         end
-        if Arceus.Both.DetectUnderGround then 
-            if TargetVel.Y < Arceus.Both.UnderGroundDetection then            
+        if SteakWare.Both.DetectUnderGround then 
+            if TargetVel.Y < SteakWare.Both.UnderGroundDetection then            
                 DetectedUnderGroundV2 = true
             else
                 DetectedUnderGroundV2 = false
@@ -1402,14 +1402,14 @@ Script.Functions.MouseChanger = LPH_NO_VIRTUALIZE(function()
         end
 
         if Script.Functions.Alive(Client) then
-            if Arceus.AimAssist.DisableLocalDeath then
+            if SteakWare.AimAssist.DisableLocalDeath then
                 if Client.Character.Humanoid.health < 4 then
                     AimTarget = nil
                     IsTargetting = false
                     return
                 end
             end
-            if Arceus.AimAssist.DisableOutSideCircle then
+            if SteakWare.AimAssist.DisableOutSideCircle then
                 local Magnitude = Script.Functions.GetMagnitudeFromMouse(AimTarget.Character.HumanoidRootPart)
                 if Script.Drawing.AimAssistCircle.Radius < Magnitude then
                     AimTarget = nil
@@ -1419,7 +1419,7 @@ Script.Functions.MouseChanger = LPH_NO_VIRTUALIZE(function()
             end
         end
 
-        if Arceus.AimAssist.DisableOn_KO and AimTarget.Character:FindFirstChild("BodyEffects") then 
+        if SteakWare.AimAssist.DisableOn_KO and AimTarget.Character:FindFirstChild("BodyEffects") then 
             local KoCheck = AimTarget.Character.BodyEffects:FindFirstChild("K.O").Value
             local Grabbed = AimTarget.Character:FindFirstChild("GRABBING_CONSTRAINT") ~= nil
             if KoCheck or Grabbed then
@@ -1428,7 +1428,7 @@ Script.Functions.MouseChanger = LPH_NO_VIRTUALIZE(function()
                 return
             end
         end
-        if Arceus.AimAssist.DisableTargetDeath then
+        if SteakWare.AimAssist.DisableTargetDeath then
             if AimTarget.Character.Humanoid.health < 4 then
                 AimTarget = nil
                 IsTargetting = false
@@ -1436,22 +1436,22 @@ Script.Functions.MouseChanger = LPH_NO_VIRTUALIZE(function()
             end
         end
 
-        if DetectedDesyncV2 and Arceus.AimAssist.PredictMovement then
+        if DetectedDesyncV2 and SteakWare.AimAssist.PredictMovement then
             local MoveDirection = TargetMov * 16
-            EndPosition = Camera:WorldToScreenPoint(TargetPos + (MoveDirection * Arceus.AimAssist.PredictionVelocity))
-        elseif DetectedUnderGroundV2 and Arceus.AimAssist.PredictMovement then
-            EndPosition = Camera:WorldToScreenPoint(TargetPos + (Vector3.new(TargetVel.X, 0, TargetVel.Z) * Arceus.AimAssist.PredictionVelocity))
-        elseif Arceus.AimAssist.PredictMovement then
-            if Arceus.AimAssist.UseShake and Script.Functions.Alive(Client) then
-                local Shake = Arceus.AimAssist.ShakeValue / 100
+            EndPosition = Camera:WorldToScreenPoint(TargetPos + (MoveDirection * SteakWare.AimAssist.PredictionVelocity))
+        elseif DetectedUnderGroundV2 and SteakWare.AimAssist.PredictMovement then
+            EndPosition = Camera:WorldToScreenPoint(TargetPos + (Vector3.new(TargetVel.X, 0, TargetVel.Z) * SteakWare.AimAssist.PredictionVelocity))
+        elseif SteakWare.AimAssist.PredictMovement then
+            if SteakWare.AimAssist.UseShake and Script.Functions.Alive(Client) then
+                local Shake = SteakWare.AimAssist.ShakeValue / 100
                 local Mag = math.ceil((TargetPos - Client.Character.HumanoidRootPart.Position).Magnitude)
-                EndPosition = Camera:WorldToScreenPoint(TargetPos + (TargetVel * Arceus.AimAssist.PredictionVelocity) + Script.Functions.RandomVec(Mag * Shake, 0.1))
+                EndPosition = Camera:WorldToScreenPoint(TargetPos + (TargetVel * SteakWare.AimAssist.PredictionVelocity) + Script.Functions.RandomVec(Mag * Shake, 0.1))
             else
-                EndPosition = Camera:WorldToScreenPoint(TargetPos + (TargetVel * Arceus.AimAssist.PredictionVelocity))
+                EndPosition = Camera:WorldToScreenPoint(TargetPos + (TargetVel * SteakWare.AimAssist.PredictionVelocity))
             end
         else
-            if Arceus.AimAssist.UseShake and Script.Functions.Alive(Client) then
-                local Shake = Arceus.AimAssist.ShakeValue / 100
+            if SteakWare.AimAssist.UseShake and Script.Functions.Alive(Client) then
+                local Shake = SteakWare.AimAssist.ShakeValue / 100
                 local Mag = math.ceil((TargetPos - Client.Character.HumanoidRootPart.Position).Magnitude)
                 EndPosition = Camera:WorldToScreenPoint(TargetPos + Script.Functions.RandomVec(Mag * Shake, 0.1))
             else
@@ -1460,8 +1460,8 @@ Script.Functions.MouseChanger = LPH_NO_VIRTUALIZE(function()
         end
 
         if EndPosition ~= nil then
-            local InCrementX = (EndPosition.X - Mouse.X) * Arceus.AimAssist.Smoothness_X
-            local InCrementY = (EndPosition.Y - Mouse.Y) * Arceus.AimAssist.Smoothness_Y
+            local InCrementX = (EndPosition.X - Mouse.X) * SteakWare.AimAssist.Smoothness_X
+            local InCrementY = (EndPosition.Y - Mouse.Y) * SteakWare.AimAssist.Smoothness_Y
             mousemoverel(InCrementX, InCrementY)
         end
     end
@@ -1473,39 +1473,39 @@ Script.Functions.UpdateFOV = LPH_NO_VIRTUALIZE(function()
         return Script.Drawing.SilentCircle and Script.Drawing.AimAssistCircle
     end
     
-    Script.Drawing.AimAssistCircle.Visible = Arceus.AimAssistFov.Visible
-    Script.Drawing.AimAssistCircle.Filled = Arceus.AimAssistFov.Filled
-    Script.Drawing.AimAssistCircle.Color = Arceus.AimAssistFov.Color
-    Script.Drawing.AimAssistCircle.Transparency = Arceus.AimAssistFov.Transparency
+    Script.Drawing.AimAssistCircle.Visible = SteakWare.AimAssistFov.Visible
+    Script.Drawing.AimAssistCircle.Filled = SteakWare.AimAssistFov.Filled
+    Script.Drawing.AimAssistCircle.Color = SteakWare.AimAssistFov.Color
+    Script.Drawing.AimAssistCircle.Transparency = SteakWare.AimAssistFov.Transparency
     Script.Drawing.AimAssistCircle.Position = Vector2.new(Mouse.X, Mouse.Y + GuiS:GetGuiInset().Y)
-	Script.Drawing.AimAssistCircle.Radius = Arceus.AimAssistFov.Radius * 3
+	Script.Drawing.AimAssistCircle.Radius = SteakWare.AimAssistFov.Radius * 3
     
-    Script.Drawing.SilentCircle.Visible = Arceus.SilentFov.Visible
-    Script.Drawing.SilentCircle.Color = Arceus.SilentFov.Color
-    Script.Drawing.SilentCircle.Filled = Arceus.SilentFov.Filled
-    Script.Drawing.SilentCircle.Transparency = Arceus.SilentFov.Transparency
+    Script.Drawing.SilentCircle.Visible = SteakWare.SilentFov.Visible
+    Script.Drawing.SilentCircle.Color = SteakWare.SilentFov.Color
+    Script.Drawing.SilentCircle.Filled = SteakWare.SilentFov.Filled
+    Script.Drawing.SilentCircle.Transparency = SteakWare.SilentFov.Transparency
     Script.Drawing.SilentCircle.Position = Vector2.new(Mouse.X, Mouse.Y + GuiS:GetGuiInset().Y)
-	Script.Drawing.SilentCircle.Radius = Arceus.SilentFov.Radius * 3
+	Script.Drawing.SilentCircle.Radius = SteakWare.SilentFov.Radius * 3
 	
-    if Arceus.RangeFov.Enabled or Arceus.GunFov.Enabled then
+    if SteakWare.RangeFov.Enabled or SteakWare.GunFov.Enabled then
 		local CurrentGun = Script.Functions.GetCurrentWeaponName()
-		if Arceus.GunFov.Enabled then
-			local WeaponSettings = Arceus.GunFov[CurrentGun]
+		if SteakWare.GunFov.Enabled then
+			local WeaponSettings = SteakWare.GunFov[CurrentGun]
 			if WeaponSettings ~= nil then
-				Arceus.SilentFov.Radius = WeaponSettings.Fov
+				SteakWare.SilentFov.Radius = WeaponSettings.Fov
 			end
 		end
-		if Arceus.RangeFov.Enabled then
-			local WeaponSettingsV2 = Arceus.RangeFov[CurrentGun]
+		if SteakWare.RangeFov.Enabled then
+			local WeaponSettingsV2 = SteakWare.RangeFov[CurrentGun]
 			if WeaponSettingsV2 ~= nil then
 				if Script.Functions.Alive(SilentTarget) and Script.Functions.Alive(Client) then
                     local Magnitude = (SilentTarget.Character.HumanoidRootPart.Position - Client.Character.HumanoidRootPart.Position).Magnitude
-					if Magnitude < Arceus.RangeFov.Close_Activation then
-						Arceus.SilentFov.Radius = WeaponSettingsV2.Close
-					elseif Magnitude < Arceus.RangeFov.Medium_Activation then
-						Arceus.SilentFov.Radius = WeaponSettingsV2.Med
-					elseif Magnitude < Arceus.RangeFov.Far_Activation then
-						Arceus.SilentFov.Radius = WeaponSettingsV2.Far
+					if Magnitude < SteakWare.RangeFov.Close_Activation then
+						SteakWare.SilentFov.Radius = WeaponSettingsV2.Close
+					elseif Magnitude < SteakWare.RangeFov.Medium_Activation then
+						SteakWare.SilentFov.Radius = WeaponSettingsV2.Med
+					elseif Magnitude < SteakWare.RangeFov.Far_Activation then
+						SteakWare.SilentFov.Radius = WeaponSettingsV2.Far
 					end
 				end
 			end
@@ -1516,7 +1516,7 @@ end)
 -- // Updates Esp Posistions
 Script.Functions.UpdateEsp = LPH_NO_VIRTUALIZE(function()
     for i,v in pairs(Script.EspPlayers) do
-        if Arceus.Esp.Enabled and i ~= Client and i.Character and i.Character:FindFirstChild("Humanoid") and i.Character:FindFirstChild("HumanoidRootPart") and i.Character:FindFirstChild("Head") then
+        if SteakWare.Esp.Enabled and i ~= Client and i.Character and i.Character:FindFirstChild("Humanoid") and i.Character:FindFirstChild("HumanoidRootPart") and i.Character:FindFirstChild("Head") then
             local Hum = i.Character.Humanoid
             local Hrp = i.Character.HumanoidRootPart
             
@@ -1527,11 +1527,11 @@ Script.Functions.UpdateEsp = LPH_NO_VIRTUALIZE(function()
             local BottomOffset = BoxSize.Y + BoxPos.Y + 1
 
             if OnScreen then
-                if Arceus.Esp.Name.Enabled then
+                if SteakWare.Esp.Name.Enabled then
                     v.Name.Position = Vector2.new(BoxSize.X / 2 + BoxPos.X, BoxPos.Y - 16)
-                    v.Name.Outline = Arceus.Esp.Name.OutLine
+                    v.Name.Outline = SteakWare.Esp.Name.OutLine
                     v.Name.Text = tostring(i)
-                    v.Name.Color = Arceus.Esp.Name.Color
+                    v.Name.Color = SteakWare.Esp.Name.Color
                     v.Name.OutlineColor = Color3.fromRGB(0, 0, 0)
                     v.Name.Font = 0
                     v.Name.Size = 16
@@ -1540,11 +1540,11 @@ Script.Functions.UpdateEsp = LPH_NO_VIRTUALIZE(function()
                 else
                     v.Name.Visible = false
                 end
-                if Arceus.Esp.Distance.Enabled and Client.Character and Client.Character:FindFirstChild("HumanoidRootPart") then
+                if SteakWare.Esp.Distance.Enabled and Client.Character and Client.Character:FindFirstChild("HumanoidRootPart") then
                     v.Distance.Position = Vector2.new(BoxSize.X / 2 + BoxPos.X, BottomOffset)
-                    v.Distance.Outline = Arceus.Esp.Distance.OutLine
+                    v.Distance.Outline = SteakWare.Esp.Distance.OutLine
                     v.Distance.Text = "[" .. math.floor((Hrp.Position - Client.Character.HumanoidRootPart.Position).Magnitude) .. "m]"
-                    v.Distance.Color = Arceus.Esp.Distance.Color
+                    v.Distance.Color = SteakWare.Esp.Distance.Color
                     v.Distance.OutlineColor = Color3.fromRGB(0, 0, 0)
                     BottomOffset = BottomOffset + 15
 
@@ -1555,40 +1555,40 @@ Script.Functions.UpdateEsp = LPH_NO_VIRTUALIZE(function()
                 else
                     v.Distance.Visible = false
                 end
-                if Arceus.Esp.Box.Enabled then
+                if SteakWare.Esp.Box.Enabled then
                     v.BoxOutline.Size = BoxSize
                     v.BoxOutline.Position = BoxPos
-                    v.BoxOutline.Visible = Arceus.Esp.Box.OutLine
+                    v.BoxOutline.Visible = SteakWare.Esp.Box.OutLine
                     v.BoxOutline.Color = Color3.fromRGB(0, 0, 0)
     
                     v.Box.Size = BoxSize
                     v.Box.Position = BoxPos
-                    v.Box.Color = Arceus.Esp.Box.Color
+                    v.Box.Color = SteakWare.Esp.Box.Color
                     v.Box.Visible = true
                 else
                     v.BoxOutline.Visible = false
                     v.Box.Visible = false
                 end
-                if Arceus.Esp.HealthBar.Enabled then
+                if SteakWare.Esp.HealthBar.Enabled then
                     v.HealthBar.From = Vector2.new((BoxPos.X - 5), BoxPos.Y + BoxSize.Y)
                     v.HealthBar.To = Vector2.new(v.HealthBar.From.X, v.HealthBar.From.Y - (Hum.Health / Hum.MaxHealth) * BoxSize.Y)
-                    v.HealthBar.Color = Arceus.Esp.HealthBar.Color
+                    v.HealthBar.Color = SteakWare.Esp.HealthBar.Color
                     v.HealthBar.Visible = true
 
                     v.HealthBarOutline.From = Vector2.new(v.HealthBar.From.X, BoxPos.Y + BoxSize.Y + 1)
                     v.HealthBarOutline.To = Vector2.new(v.HealthBar.From.X, (v.HealthBar.From.Y - 1 * BoxSize.Y) -1)
                     v.HealthBarOutline.Color = Color3.fromRGB(0, 0, 0)
-                    v.HealthBarOutline.Visible = Arceus.Esp.HealthBar.OutLine
+                    v.HealthBarOutline.Visible = SteakWare.Esp.HealthBar.OutLine
                 else
                     v.HealthBarOutline.Visible = false
                     v.healthBar.Visible = false
                 end
-                if Arceus.Esp.HealthText.Enabled then
+                if SteakWare.Esp.HealthText.Enabled then
                     v.HealthText.Text = tostring(math.floor((Hum.Health / Hum.MaxHealth) * 100 + 0.5))
                     v.HealthText.Position = Vector2.new((BoxPos.X - 20), (BoxPos.Y + BoxSize.Y - 1 * BoxSize.Y) -1)
-                    v.HealthText.Color = Arceus.Esp.HealthText.Color
+                    v.HealthText.Color = SteakWare.Esp.HealthText.Color
                     v.HealthText.OutlineColor = Color3.fromRGB(0, 0, 0)
-                    v.HealthText.Outline = Arceus.Esp.HealthText.OutLine
+                    v.HealthText.Outline = SteakWare.Esp.HealthText.OutLine
 
                     v.HealthText.Font = 0
                     v.HealthText.Size = 16
@@ -1629,27 +1629,27 @@ end))
 RS.RenderStepped:Connect(LPH_NO_VIRTUALIZE(function()
     Script.Functions.UpdateEsp()
     Script.Functions.UpdateFOV()
-    if Arceus.Silent.Enabled and Arceus.Silent.ClosestPoint and Script.Functions.Alive(SilentTarget) and Players[tostring(SilentTarget)].Character:FindFirstChild(Arceus.Silent.Part) then
-        local ClosestPoint = Script.Functions.GetClosestPointOfPart(Players[tostring(SilentTarget)].Character[Arceus.Silent.Part])
+    if SteakWare.Silent.Enabled and SteakWare.Silent.ClosestPoint and Script.Functions.Alive(SilentTarget) and Players[tostring(SilentTarget)].Character:FindFirstChild(SteakWare.Silent.Part) then
+        local ClosestPoint = Script.Functions.GetClosestPointOfPart(Players[tostring(SilentTarget)].Character[SteakWare.Silent.Part])
         ClosestPointCF = CFrame.new(ClosestPoint.X, ClosestPoint.Y, ClosestPoint.Z)
     end
-    if Arceus.AimAssist.Enabled and Script.Functions.Alive(AimTarget) and Arceus.Silent.ClosestPart and Script.Functions.Alive(SilentTarget) then
+    if SteakWare.AimAssist.Enabled and Script.Functions.Alive(AimTarget) and SteakWare.Silent.ClosestPart and Script.Functions.Alive(SilentTarget) then
         local currentpart = tostring(Script.Functions.GetClosestBodyPart(AimTarget.Character))
-        if Arceus.AimAssist.ClosestPart then
-			Arceus.AimAssist.Part = currentpart
+        if SteakWare.AimAssist.ClosestPart then
+			SteakWare.AimAssist.Part = currentpart
 		end
-        if Arceus.Silent.ClosestPart then
-            Arceus.Silent.Part = currentpart
-            OldSilentAimPart = Arceus.Silent.Part
+        if SteakWare.Silent.ClosestPart then
+            SteakWare.Silent.Part = currentpart
+            OldSilentAimPart = SteakWare.Silent.Part
         end
         return
     end
-    if Arceus.AimAssist.Enabled and Arceus.AimAssist.ClosestPart and Script.Functions.Alive(AimTarget) then
-        Arceus.AimAssist.Part = tostring(Script.Functions.GetClosestBodyPart(AimTarget.Character))
+    if SteakWare.AimAssist.Enabled and SteakWare.AimAssist.ClosestPart and Script.Functions.Alive(AimTarget) then
+        SteakWare.AimAssist.Part = tostring(Script.Functions.GetClosestBodyPart(AimTarget.Character))
     end
-    if Arceus.Silent.Enabled and Arceus.Silent.ClosestPart and Script.Functions.Alive(SilentTarget) then
-        Arceus.Silent.Part = tostring(Script.Functions.GetClosestBodyPart(SilentTarget.Character))
-        OldSilentAimPart = Arceus.Silent.Part
+    if SteakWare.Silent.Enabled and SteakWare.Silent.ClosestPart and Script.Functions.Alive(SilentTarget) then
+        SteakWare.Silent.Part = tostring(Script.Functions.GetClosestBodyPart(SilentTarget.Character))
+        OldSilentAimPart = SteakWare.Silent.Part
     end
 end))
 
@@ -1681,4 +1681,4 @@ Players.PlayerRemoving:Connect(function(Player)
     Script.EspPlayers[Player] = nil
 end)
 
-end)()
+end())
