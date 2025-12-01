@@ -1681,4 +1681,81 @@ Players.PlayerRemoving:Connect(function(Player)
     Script.EspPlayers[Player] = nil
 end)
 
+-- // Adonis Bypass
+
+if game and not game:IsLoaded() then
+    repeat wait() until game:IsLoaded()
+end
+
+local old_identity = getthreadidentity()
+
+setthreadidentity(2) -- prevents "Adonis_0x16471" kick
+local mt = getrawmetatable(game)
+setreadonly(mt, false)
+
+local oldNewIndex = mt.__newindex
+
+mt.__newindex = newcclosure(function(t, k, v)
+    if typeof(t) == "Instance" then
+        local className = t.ClassName or "Unknown"
+        if k == "Parent" or k == "Name" then
+            return
+        end
+    end
+    return oldNewIndex(t, k, v)
+end)
+
+setreadonly(mt, true)
+print("__newindex hook installed.")
+
+task.spawn(function()
+    local patched = 0
+
+    for _, func in ipairs(getgc(true)) do
+        if typeof(func) == "function" and islclosure(func) then
+            local ok, consts = pcall(debug.getconstants, func)
+            if ok and consts and #consts <= 2 then
+                for i, c in ipairs(consts) do
+                    if tostring(c):lower():find("script") == nil and tostring(c):lower():find("rbx") == nil then
+                        local src = debug.info(func, "s") or ""
+                        if src:find("Anti") or src:lower():find("core") then
+                            hookfunction(func, function(...)
+                                warn("dont crash my nigga")
+                                return
+                            end)
+                            patched += 1
+                        end
+                    end
+                end
+            end
+        end
+    end
+    warn("crash loop patch complete:", patched)
+end)
+
+task.defer(function()
+    for _, v in getgc(true) do
+        if typeof(v) == "table" and rawget(v, "Kill") and typeof(v.Kill) == "function" then
+            hookfunction(v.Kill, function(...)
+                warn("kill() blocked imagine")
+                return
+            end)
+        end
+    end
+end)
+
+local old_debug_info = debug.info
+hookfunction(debug.info, newcclosure(function(func, what)
+    if typeof(func) == "function" and debug.info(func, "s") and debug.info(func, "s"):find("Core.Anti") then
+        if what == "n" then return "Detected" end
+        if what == "f" then return func end
+        if what == "s" then return debug.info(func, "s") end
+        if what == "l" then return debug.info(func, "l") end
+        if what == "a" then return debug.info(func, "a") end
+    end
+    return old_debug_info(func, what)
+end))
+
+setthreadidentity(old_identity) -- restore the old identity
+
 end)()
