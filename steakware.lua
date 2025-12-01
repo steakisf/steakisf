@@ -70,10 +70,10 @@ getgenv().SteakWare = {
         ["Color"] = (Color3.fromRGB(255, 255, 255)), -- // Circle Transparency
         ["Radius"] = (5) -- // How Big The Circle Is
     },
-    AimAssist = {
+    AimAssist = { -- // Wouldn't Recommend Using Aim Assist Very Buggy At The Moment And Is Blatant
         ["Enabled"] = (true), -- // Use The Aim Assist Or Not
         
-        ["Key"] = ("MouseButton1"), -- // The Key To Lock Onto A Player
+        ["Key"] = ("MouseButton2"), -- // The Key To Lock Onto A Player
         ["HoldMode"] = (true), -- // Enables While Only Holding The Key
         
         ["Part"] = ("UpperTorso"), -- // The Part That Aim Assist Locks On
@@ -94,15 +94,15 @@ getgenv().SteakWare = {
         
         ["WallCheck"] = (true), -- // Checks If Theres A Wall
         
-        ["Smoothness_X"] = (0.07184), -- // How Smooth The Aim Assist Is On X
-        ["Smoothness_Y"] = (0.04651) -- // How Smooth The Aim Assist Is On Y
+        ["Smoothness_X"] = (0.35), -- // How Smooth The Aim Assist Is On X
+        ["Smoothness_Y"] = (0.31) -- // How Smooth The Aim Assist Is On Y
     },
     AimAssistFov = {
         ["Visible"] = (false), -- // If The Circle Is Showing Or Not
         ["Filled"] = (false), -- // If The Circle Is Filled
         ["Transparency"] = (0.5), -- // Circle Transparency
         ["Color"] = (Color3.fromRGB(255, 87, 87)), -- // Circle Transparency
-        ["Radius"] = (370) -- // How Big The Circle Is
+        ["Radius"] = (12) -- // How Big The Circle Is
     },
     Both = {
         ["DetectDesync"] = (true), -- // Detects Velocity Changer + Actually Hits
@@ -118,11 +118,11 @@ getgenv().SteakWare = {
         ["UnderGroundKey"] = ("X"), -- // KeyBind To Enable / Disable UnderGround Resolver
         
         ["VisibleCheck"] = (true), -- // Checks If Target Is Visible
-        ["CrewCheck"] = (false), -- // Checks If Target Is In Your Crew
+        ["CrewCheck"] = (true), -- // Checks If Target Is In Your Crew
         ["FriendCheck"] = (false), -- // Checks If Target Is Your Friend
-        ["TeamCheck"] = (false), -- // Checks If Player Is In the Same Team
+        ["TeamCheck"] = (true), -- // Checks If Player Is In the Same Team
         
-        ["UseLay"] = (true), -- // Enable / Disable Lay Keybind
+        ["UseLay"] = (false), -- // Enable / Disable Lay Keybind
         ["LayKeybind"] = ("v"), -- // KeyBind To Lay
         
         ["SendNotification"] = (true) -- // Sends Notification When you Enabled / Disabled Stuff
