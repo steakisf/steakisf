@@ -1681,4 +1681,4 @@ Players.PlayerRemoving:Connect(function(Player)
     Script.EspPlayers[Player] = nil
 end)
 
-end())
+end)()
