@@ -64,7 +64,7 @@ getgenv().SteakWare = {
         -- // You Can Add Custom Weapons If You Want To :p
     },
     SilentFov = {
-        ["Visible"] = (true), -- // If The Circle Is Showing Or Not
+        ["Visible"] = (false), -- // If The Circle Is Showing Or Not
         ["Filled"] = (false), -- // If The Circle Is Filled
         ["Transparency"] = (1), -- // The Circle Transparency
         ["Color"] = (Color3.fromRGB(255, 255, 255)), -- // Circle Transparency
