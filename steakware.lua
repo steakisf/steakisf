@@ -38,12 +38,12 @@ getgenv().SteakWare = {
     GunFov = {
         ["Enabled"] = (false), -- // Gun Fov / Fov Is Automatically Changed To Specific Gun Equipped
     
-["Double-Barrel SG"] = {["Fov"] = 22}, -- // Db
-        ["Revolver"] = {["Fov"] = 6.2}, -- // Rev
+["db"] = {["Fov"] = 22}, -- // Db
+        ["rev"] = {["Fov"] = 6.2}, -- // Rev
              ["SMG"] = {["Fov"] = 3}, -- // Smg
          ["Shotgun"] = {["Fov"] = 18}, -- // Shotgun
            ["Rifle"] = {["Fov"] = 3}, -- // Rifle
- ["TacticalShotgun"] = {["Fov"] = 20}, -- // Tactical
+ ["tactical sg"] = {["Fov"] = 20}, -- // Tactical
         ["Silencer"] = {["Fov"] = 2.8}, -- // Smg
             ["AK47"] = {["Fov"] = 2.8}, -- // Ak47
               ["AR"] = {["Fov"] = 2.8} -- // Rifle
@@ -68,7 +68,7 @@ getgenv().SteakWare = {
         ["Filled"] = (false), -- // If The Circle Is Filled
         ["Transparency"] = (1), -- // The Circle Transparency
         ["Color"] = (Color3.fromRGB(255, 255, 255)), -- // Circle Transparency
-        ["Radius"] = (4.6) -- // How Big The Circle Is
+        ["Radius"] = (8) -- // How Big The Circle Is
     },
     AimAssist = { -- // Wouldn't Recommend Using Aim Assist Very Buggy At The Moment And Is Blatant
         ["Enabled"] = (true), -- // Use The Aim Assist Or Not
@@ -1680,82 +1680,5 @@ Players.PlayerRemoving:Connect(function(Player)
     end
     Script.EspPlayers[Player] = nil
 end)
-
--- // Adonis Bypass
-
-if game and not game:IsLoaded() then
-    repeat wait() until game:IsLoaded()
-end
-
-local old_identity = getthreadidentity()
-
-setthreadidentity(2) -- prevents "Adonis_0x16471" kick
-local mt = getrawmetatable(game)
-setreadonly(mt, false)
-
-local oldNewIndex = mt.__newindex
-
-mt.__newindex = newcclosure(function(t, k, v)
-    if typeof(t) == "Instance" then
-        local className = t.ClassName or "Unknown"
-        if k == "Parent" or k == "Name" then
-            return
-        end
-    end
-    return oldNewIndex(t, k, v)
-end)
-
-setreadonly(mt, true)
-print("__newindex hook installed.")
-
-task.spawn(function()
-    local patched = 0
-
-    for _, func in ipairs(getgc(true)) do
-        if typeof(func) == "function" and islclosure(func) then
-            local ok, consts = pcall(debug.getconstants, func)
-            if ok and consts and #consts <= 2 then
-                for i, c in ipairs(consts) do
-                    if tostring(c):lower():find("script") == nil and tostring(c):lower():find("rbx") == nil then
-                        local src = debug.info(func, "s") or ""
-                        if src:find("Anti") or src:lower():find("core") then
-                            hookfunction(func, function(...)
-                                warn("dont crash my nigga")
-                                return
-                            end)
-                            patched += 1
-                        end
-                    end
-                end
-            end
-        end
-    end
-    warn("crash loop patch complete:", patched)
-end)
-
-task.defer(function()
-    for _, v in getgc(true) do
-        if typeof(v) == "table" and rawget(v, "Kill") and typeof(v.Kill) == "function" then
-            hookfunction(v.Kill, function(...)
-                warn("kill() blocked imagine")
-                return
-            end)
-        end
-    end
-end)
-
-local old_debug_info = debug.info
-hookfunction(debug.info, newcclosure(function(func, what)
-    if typeof(func) == "function" and debug.info(func, "s") and debug.info(func, "s"):find("Core.Anti") then
-        if what == "n" then return "Detected" end
-        if what == "f" then return func end
-        if what == "s" then return debug.info(func, "s") end
-        if what == "l" then return debug.info(func, "l") end
-        if what == "a" then return debug.info(func, "a") end
-    end
-    return old_debug_info(func, what)
-end))
-
-setthreadidentity(old_identity) -- restore the old identity
 
 end)()
