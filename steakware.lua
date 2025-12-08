@@ -68,7 +68,7 @@ getgenv().SteakWare = {
         ["Filled"] = (false), -- // If The Circle Is Filled
         ["Transparency"] = (1), -- // The Circle Transparency
         ["Color"] = (Color3.fromRGB(255, 255, 255)), -- // Circle Transparency
-        ["Radius"] = (8) -- // How Big The Circle Is
+        ["Radius"] = (5.5) -- // How Big The Circle Is
     },
     AimAssist = { -- // Wouldn't Recommend Using Aim Assist Very Buggy At The Moment And Is Blatant
         ["Enabled"] = (true), -- // Use The Aim Assist Or Not
