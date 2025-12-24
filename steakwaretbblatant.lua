@@ -13,8 +13,8 @@ getgenv().SteakWare = {
         ["Humanize"] = (true), -- // Makes It So The Silent Doesnt Hit The Same Position
         ["HumanizeValue"] = (3), -- // Makes How Much Power It Changes
         
-        ["TriggerBot"] = (false), -- // Shoots AutoMatically
-        ["UseTriggerBotKeybind"] = (false), -- // Enable / Disable TriggerBot Keybind
+        ["TriggerBot"] = (true), -- // Shoots AutoMatically
+        ["UseTriggerBotKeybind"] = (true), -- // Enable / Disable TriggerBot Keybind
         ["TriggerBotKey"] = ("MouseButton3"), -- // KeyBind To Enable / Disable TriggerBot You Can Find More At https://create.roblox.com/docs/reference/engine/enums/UserInputType
         
         ["PredictMovement"] = (true), -- // Predicts Targets Movement
@@ -68,7 +68,7 @@ getgenv().SteakWare = {
         ["Filled"] = (false), -- // If The Circle Is Filled
         ["Transparency"] = (1), -- // The Circle Transparency
         ["Color"] = (Color3.fromRGB(255, 255, 255)), -- // Circle Transparency
-        ["Radius"] = (5.5) -- // How Big The Circle Is
+        ["Radius"] = (55) -- // How Big The Circle Is
     },
     AimAssist = { -- // Wouldn't Recommend Using Aim Assist Very Buggy At The Moment And Is Blatant
         ["Enabled"] = (true), -- // Use The Aim Assist Or Not
