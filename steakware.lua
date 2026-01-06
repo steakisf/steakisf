@@ -1669,57 +1669,6 @@ Players.PlayerAdded:Connect(function(Player)
     Script.Functions.NewPlayer(Player)
 end)
 
--- // Voidfalls Mod Detector
-local StarterGui = game:GetService("StarterGui")
-local Players = game:GetService("Players")
-
-local GROUP_ID = 693335996
-
-local function getHeadshot(userId)
-    local content, isReady = Players:GetUserThumbnailAsync(
-        userId,
-        Enum.ThumbnailType.HeadShot,
-        Enum.ThumbnailSize.Size420x420
-    )
-
-    return content
-end
-
-local function sendNoti(player)
-    local headShot = getHeadshot(player.UserId)
-
-    StarterGui:SetCore("SendNotification", {
-        Title = player.DisplayName,
-        Text = string.format("%s is in this server", player.Name),
-        Icon = headShot or "rbxassetid://15059364356",
-        Duration = 10
-    })
-end
-
-local function playerIsInGroup(player)
-    local success, inGroup = pcall(function()
-        return player:IsInGroup(GROUPID)
-    end)
-
-    return success and inGroup
-end
-
-local function main()
-    for , plr in pairs(Players:GetPlayers()) do
-        if playerIsInGroup(plr) then
-            sendNoti(plr)
-        end
-    end
-
-    Players.PlayerAdded:Connect(function(plr)
-        if playerIsInGroup(plr) then
-            sendNoti(plr)
-        end
-    end)
-end
-
-main()
-
 -- // Checks If A Player Left And Removes Them From The Table
 Players.PlayerRemoving:Connect(function(Player)
     local i = table.find(Script.Friends, Player)
