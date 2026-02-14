@@ -33,7 +33,7 @@ getgenv().SteakWare = {
         ["CheckIf_TargetDeath"] = (true), -- // Checks If Target Is Dead
         
         ["UseKeybind"] = (true), -- // Use The KeyBind To Enable / Disable The Silent Aim
-        ["Keybind"] = ("B") -- // The Keybind That Enables / Disables The Silent Aim
+        ["Keybind"] = ("Q") -- // The Keybind That Enables / Disables The Silent Aim
     },
     GunFov = {
         ["Enabled"] = (false), -- // Gun Fov / Fov Is Automatically Changed To Specific Gun Equipped
@@ -68,7 +68,7 @@ getgenv().SteakWare = {
         ["Filled"] = (false), -- // If The Circle Is Filled
         ["Transparency"] = (1), -- // The Circle Transparency
         ["Color"] = (Color3.fromRGB(255, 255, 255)), -- // Circle Transparency
-        ["Radius"] = (5.5) -- // How Big The Circle Is
+        ["Radius"] = (4) -- // How Big The Circle Is
     },
     AimAssist = { -- // Wouldn't Recommend Using Aim Assist Very Buggy At The Moment And Is Blatant
         ["Enabled"] = (true), -- // Use The Aim Assist Or Not
@@ -102,7 +102,7 @@ getgenv().SteakWare = {
         ["Filled"] = (false), -- // If The Circle Is Filled
         ["Transparency"] = (0.5), -- // Circle Transparency
         ["Color"] = (Color3.fromRGB(255, 87, 87)), -- // Circle Transparency
-        ["Radius"] = (12) -- // How Big The Circle Is
+        ["Radius"] = (100) -- // How Big The Circle Is
     },
     Both = {
         ["DetectDesync"] = (true), -- // Detects Velocity Changer + Actually Hits
@@ -128,7 +128,7 @@ getgenv().SteakWare = {
         ["SendNotification"] = (true) -- // Sends Notification When you Enabled / Disabled Stuff
     },
     Commands = {
-        ["Enabled"] = (false), -- // Enable / Disable Chat Command
+        ["Enabled"] = (true), -- // Enable / Disable Chat Command
 
         -- // Silent Table
         ["Silent_Enabled"] = ("!senabled"), -- // The Command To Enable / Disable Silent (With false/true)
